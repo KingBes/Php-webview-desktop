@@ -267,11 +267,11 @@ result
 // The taskbar menu field name is the menu `name` field `fn` is the function that is triggered when clicked
 $arr = [
     ["name" => "show", "fn" => function () use ($webview) {
-        // 显示窗口
+        
         $webview->show_win();
     }],
     ["name" => "exit", "fn" => function () use ($webview) {
-        // 退出窗口
+        
         $webview->destroy_win();
     }]
 ];
