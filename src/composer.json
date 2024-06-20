@@ -1,5 +1,5 @@
 {
     "require": {
-        "king-bes/php-webview": "^1.2.1"
+        "kingbes/framework": "^0.0.8"
     }
 }

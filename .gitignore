@@ -1,4 +1,4 @@
-/vendor
+vendor
 /build
 /library/*build
 /library/*dll

@@ -1,15 +1,17 @@
 <?php
 
-require_once "vendor/autoload.php";
+declare(strict_types=1);
+
+require "vendor/autoload.php";
 
 use KingBes\PhpWebview\WebView;
 use KingBes\PhpWebview\Dialog;
 
-// 对话实例
-$dialog = new Dialog(__DIR__);
+use KingBes\PhpWebview\Toast;
+
 
 // webview实例
-$webview = new WebView('Php WebView', 640, 480, true, __DIR__);
+$webview = new WebView('Php WebView', 640, 480, true);
 // 获取html
 $html = <<<EOF
 <button onclick="onMsg('hello php',2)">弹出</button>
@@ -24,16 +26,6 @@ $html = <<<EOF
 EOF;
 // 设置HTML
 $webview->setHTML($html);
-
-/* $pharPath = \Phar::running(false);
-if ($pharPath != "") {
-    // 打包后的路径获取
-    $url = dirname($pharPath) . "/index.html";
-} else {
-    // 没打包后的路径获取
-    $url = dirname(__DIR__)  . "/index.html";
-}
-$webview->navigate($url); */
 
 // 任务栏标题
 $webview->icon_title('php WeView');
@@ -50,11 +42,13 @@ $arr = [
 ];
 $webview->icon_menu($arr);
 // 绑定
+$dialog = new Dialog();
 $webview->bind('openMsg', function ($seq, $req, $context) use ($dialog) {
     // 弹出消息窗口
     $msg = $dialog->msg($req[0], $req[1]);
     return ["code" => 0, "msg" => $msg];
 });
+
 // 运行
 $webview->run();
 // 销毁
